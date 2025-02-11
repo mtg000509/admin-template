@@ -15,10 +15,10 @@ const props = defineProps<{
 defineOptions({ name: 'NavBar' });
 
 // 图标大小
-const iconSize = computed(() => props.iconSize);
+const iconSize = props.iconSize;
 
 // 菜单折叠
-const menuFold = computed(() => props.menuFold);
+const menuFold = props.menuFold;
 
 // 折叠菜单
 const changeMenuFold = () => {

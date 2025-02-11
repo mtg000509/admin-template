@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { TypeLanguage } from '@/locales';
 import { languageList } from '@/locales';
-import { useSettingStore } from '@/store/core';
+import { useSettingStore, useUserStore } from '@/store/core';
 
+import MenuList from './components/MenuList.vue';
 import NavBar from './components/NavBar.vue';
+import TitleBar from './components/TitleBar.vue';
 
 import { computed } from 'vue';
 
@@ -30,12 +32,25 @@ const language = computed(() => settingStore.language);
 const changeLanguge = (command: TypeLanguage) => {
   settingStore.setLanguage(command);
 };
+
+// user store
+const userStore = useUserStore();
+
+// 菜单列表
+const menuList = userStore.menuList;
 </script>
 
 <template>
   <div class="layout">
     <el-container>
-      <el-aside :class="{ fold: menuFold }">Aside</el-aside>
+      <el-aside :class="{ fold: menuFold }">
+        <TitleBar :isFold="menuFold" />
+        <el-scrollbar>
+          <el-menu :collapse="menuFold" :default-active="$route.path" collapse-transition>
+            <MenuList :menuList="menuList" />
+          </el-menu>
+        </el-scrollbar>
+      </el-aside>
       <el-container>
         <el-header :class="{ fold: menuFold }">
           <NavBar
@@ -67,10 +82,25 @@ const changeLanguge = (command: TypeLanguage) => {
   .el-aside {
     width: $aside-width;
     height: 100vh;
-    background-color: rgb(1 76 76);
+    overflow: hidden;
 
     &.fold {
       width: $aside-min-width;
+    }
+
+    .el-menu {
+      --el-menu-bg-color: transparent;
+
+      min-width: $aside-min-width;
+      border: none;
+
+      :deep(.el-menu-item:hover) {
+        background-color: unset;
+      }
+
+      :deep(.el-sub-menu__title:hover) {
+        background-color: unset;
+      }
     }
   }
 
@@ -87,8 +117,9 @@ const changeLanguge = (command: TypeLanguage) => {
   .el-main {
     width: calc(100vw - $aside-width);
     height: calc(100vh - $navbar-height);
-    padding: unset;
-    background-color: rgb(60 98 0);
+    padding: 20px;
+
+    // background-color: rgb(60 98 0);
 
     &.fold {
       width: calc(100vw - $aside-min-width);

@@ -7,8 +7,8 @@ interface TypePreferences {
   titleName?: string;
 }
 
-/** 偏好设置 */
+// 偏好设置
 export const preferences = reactive<TypePreferences>({
-  logoPath: '/logo.svg',
+  logoPath: '/logo.png',
   titleName: 'Template',
 });
