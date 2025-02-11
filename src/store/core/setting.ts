@@ -1,3 +1,7 @@
+import i18n, { type TypeLanguage } from '@/locales';
+
+import { ref } from 'vue';
+
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
 // store id
@@ -6,7 +10,19 @@ const storeId = 'setting';
 export const useSettingStore = defineStore(
   storeId,
   () => {
-    return {};
+    // 当前语言
+    const language = ref<string>(i18n.global.locale.value);
+
+    // 设置语言
+    const setLanguage = (lang: TypeLanguage) => {
+      language.value = lang;
+      i18n.global.locale.value = lang;
+    };
+
+    // 菜单折叠
+    const menuFold = ref<boolean>(false);
+
+    return { language, setLanguage, menuFold };
   },
   {
     persist: {

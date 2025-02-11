@@ -23,13 +23,13 @@ export const languageList = {
 } as const;
 
 // 语言类型
-export type LanguageTypes = keyof typeof languageList;
+export type TypeLanguage = keyof typeof languageList;
 
 // 语言配置
 const messages = {
   zhCn: mergeLocaleModules(zhCnModules),
   en: mergeLocaleModules(enModules),
-} satisfies Record<LanguageTypes, any>;
+} satisfies Record<TypeLanguage, any>;
 
 // 创建 i18n 实例
 const i18n = createI18n({

@@ -1,3 +1,5 @@
+import i18n from '@/locales';
+
 import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 import axios from 'axios';
@@ -31,7 +33,12 @@ request.interceptors.request.use(
 // 响应拦截器
 request.interceptors.response.use(
   (response: AxiosResponse) => {
-    const { code } = response.data;
+    const { code, message } = response.data;
+
+    // 如果 message 是对象，则根据当前语言获取对应语言的值
+    if (message && typeof message === 'object') {
+      response.data.message = message[i18n.global.locale.value];
+    }
 
     if (code !== 200) {
       return Promise.reject(new Error(response.data.message));

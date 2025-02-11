@@ -19,7 +19,7 @@ defineOptions({ name: 'Error' });
   .bg {
     width: 50%;
     height: 50vh;
-    background-image: url('@/assets/images/404.png');
+    background-image: url('@/assets/images/error/404.png');
     background-position: center center;
     background-size: cover;
   }

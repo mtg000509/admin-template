@@ -1,4 +1,4 @@
-import type { LanguageTypes } from './index';
+import type { TypeLanguage } from './index';
 import type { Language } from 'element-plus/es/locale/';
 
 import en from 'element-plus/es/locale/lang/en';
@@ -8,4 +8,4 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn';
 export const elementLanguage = {
   zhCn: zhCn,
   en: en,
-} satisfies Record<LanguageTypes, Language>;
+} satisfies Record<TypeLanguage, Language>;
