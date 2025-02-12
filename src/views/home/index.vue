@@ -5,3 +5,10 @@ defineOptions({ name: 'Home' });
 <template>
   <div class="home">Home</div>
 </template>
+
+<style scoped lang="scss">
+.home {
+  width: 100%;
+  height: 100%;
+}
+</style>

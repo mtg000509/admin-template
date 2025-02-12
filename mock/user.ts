@@ -4,7 +4,7 @@ const userList = () => {
   return [
     {
       userId: 1,
-      name: '普通用户',
+      name: '用户',
       avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
       username: 'users',
       password: '123456',

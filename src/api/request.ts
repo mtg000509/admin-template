@@ -1,4 +1,5 @@
 import i18n from '@/locales';
+import { useUserStore } from '@/store/core';
 
 import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
@@ -25,6 +26,12 @@ const request: AxiosInstance = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    const userStore = useUserStore();
+
+    if (userStore.userToken) {
+      config.headers.token = userStore.userToken;
+    }
+
     return config;
   },
   (error) => Promise.reject(error),

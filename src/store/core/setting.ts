@@ -22,7 +22,10 @@ export const useSettingStore = defineStore(
     // 菜单折叠
     const menuFold = ref<boolean>(false);
 
-    return { language, setLanguage, menuFold };
+    // 刷新
+    const refresh = ref<boolean>(false);
+
+    return { language, setLanguage, menuFold, refresh };
   },
   {
     persist: {

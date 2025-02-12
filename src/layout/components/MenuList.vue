@@ -8,7 +8,7 @@ const props = defineProps<{
 defineOptions({ name: 'MenuList' });
 
 // 图标大小
-const iconSize = 25;
+const iconSize = 20;
 
 // 获取路由对象
 const $router = useRouter();

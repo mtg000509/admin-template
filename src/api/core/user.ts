@@ -30,7 +30,6 @@ export const apiUserLogin = (data: TypeUserLogin) => {
 
 export const schemaGetUserInfo = baseSchema.extend({
   data: z.object({
-    username: z.string(),
     name: z.string(),
     avatar: z.string(),
   }),

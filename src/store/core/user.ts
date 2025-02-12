@@ -1,4 +1,11 @@
-import { apiUserLogin, schemaResUserLogin, schemaUserLogin, type TypeUserLogin } from '@/api/core';
+import {
+  apiGetUserInfo,
+  apiUserLogin,
+  schemaGetUserInfo,
+  schemaResUserLogin,
+  schemaUserLogin,
+  type TypeUserLogin,
+} from '@/api/core';
 import routes from '@/router/routes';
 
 import { ref } from 'vue';
@@ -25,7 +32,37 @@ export const useUserStore = defineStore(
       return checkResult;
     };
 
-    return { menuList, userToken, userLogin };
+    // 用户信息类型
+    interface TypeUserInfo {
+      // 名称
+      name: string;
+      // 头像
+      avatar: string;
+    }
+
+    // 用户信息
+    const userInfo = ref<TypeUserInfo | null>(null);
+
+    // 获取用户信息
+    const getUserInfo = async () => {
+      const result = await apiGetUserInfo();
+      const checkResult = schemaGetUserInfo.parse(result);
+
+      if (checkResult.code === 200) {
+        userInfo.value = checkResult.data;
+        return checkResult;
+      } else {
+        return Promise.reject(new Error(checkResult.message));
+      }
+    };
+
+    // 退出登录
+    const userLogout = () => {
+      userToken.value = null;
+      userInfo.value = null;
+    };
+
+    return { menuList, userToken, userLogin, userInfo, getUserInfo, userLogout };
   },
   {
     persist: {

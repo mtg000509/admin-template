@@ -6,7 +6,7 @@ import { reactive, ref } from 'vue';
 import { Lock, User } from '@element-plus/icons-vue';
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 defineOptions({ name: 'LoginForm' });
 
@@ -57,8 +57,11 @@ const loginFormRules = reactive<FormRules<typeof loginFormData>>({
 // 获取 user store 实例
 const userStore = useUserStore();
 
-// 获取路由实例
+// 获取路由器
 const $router = useRouter();
+
+// 获取路由
+const $route = useRoute();
 
 // 提交登录表单
 const submitLoginForm = async (formEl: FormInstance | undefined) => {
@@ -72,7 +75,9 @@ const submitLoginForm = async (formEl: FormInstance | undefined) => {
     try {
       const { message } = await userStore.userLogin(loginFormData);
       ElMessage.success({ message, type: 'success' });
-      await $router.push('/');
+
+      const redirect: any = $route.query.redirect;
+      await $router.push({ path: redirect || '/' });
     } catch (error) {
       ElMessage.error({ message: (error as Error).message, type: 'error' });
     }
