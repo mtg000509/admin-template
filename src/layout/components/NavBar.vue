@@ -1,56 +1,28 @@
 <script setup lang="ts">
-import type { TypeLanguage } from '@/locales';
+import { useSetting } from '../hooks/useSetting';
+import { useUser } from '../hooks/useUser';
 
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
   iconSize: number;
-  menuFold: boolean;
-  foldEnable: boolean;
-  changeMenuFold: () => void;
-  language: string;
-  changeLanguge: (command: TypeLanguage) => void;
-  languageList: object;
-  fullScreen: () => void;
-  updateRefresh: () => void;
-  userInfo: any;
-  logOut: () => void;
 }>();
-
-defineOptions({ name: 'NavBar' });
 
 // 图标大小
 const iconSize = props.iconSize;
 
-// 菜单折叠
-const menuFold = computed(() => props.menuFold);
+defineOptions({ name: 'NavBar' });
 
-// 折叠菜单
-const changeMenuFold = () => props.changeMenuFold();
-
-// 折叠菜单是否可用
-const foldEnable = computed(() => props.foldEnable);
-
-// 当前语言
-const language = computed(() => props.language);
-
-// 切换语言
-const changeLanguge = (command: TypeLanguage) => props.changeLanguge(command);
-
-// 刷新页面
-const updateRefresh = () => props.updateRefresh();
-
-// 全屏
-const fullScreen = () => props.fullScreen();
+const { userInfo, logOut } = useUser();
 
 // 用户名
-const name = props.userInfo.name;
+const name = userInfo?.name;
 
 // 用户头像
-const avatar = props.userInfo.avatar;
+const avatar = userInfo?.avatar;
 
-// 退出登录
-const logOut = () => props.logOut();
+const { menuFold, changeMenuFold, foldEnable, languageList, language, changeLanguge, updateRefresh, fullScreen } =
+  useSetting();
 
 // 设置抽屉显示
 const settingVisible = ref<boolean>(false);
@@ -198,10 +170,6 @@ const changeSettingVisible = () => {
       font-weight: 600;
       color: black;
     }
-
-    // .el-drawer__body {
-    //   background-color: aquamarine;
-    // }
   }
 }
 
