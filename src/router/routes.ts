@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
         name: 'Home',
         component: () => import('@/views/home/index.vue'),
         meta: {
-          title: '首页',
+          title: 'route.home',
           icon: 'HomeFilled',
           hidden: false,
         },
@@ -29,48 +29,6 @@ const routes: RouteRecordRaw[] = [
     meta: {
       hidden: true,
     },
-  },
-  {
-    path: '/4041',
-    name: '4041',
-    component: () => import('@/views/error/index.vue'),
-    meta: {
-      title: '404',
-      icon: 'HomeFilled',
-      hidden: false,
-    },
-    children: [
-      {
-        path: '/login1',
-        name: 'Login1',
-        component: () => import('@/views/login/index.vue'),
-        meta: {
-          title: '首页',
-          icon: 'HomeFilled',
-          hidden: false,
-        },
-      },
-      {
-        path: '/login2',
-        name: 'Login2',
-        component: () => import('@/views/login/index.vue'),
-        meta: {
-          title: '首页',
-          icon: 'HomeFilled',
-          hidden: false,
-        },
-      },
-      {
-        path: '/login3',
-        name: 'Login3',
-        component: () => import('@/views/login/index.vue'),
-        meta: {
-          title: '首页',
-          icon: 'HomeFilled',
-          hidden: false,
-        },
-      },
-    ],
   },
   {
     path: '/404',

@@ -9,6 +9,6 @@ interface TypePreferences {
 
 // 偏好设置
 export const preferences = reactive<TypePreferences>({
-  logoPath: '/logo.png',
+  logoPath: '/圣诞树.svg',
   titleName: 'Template',
 });

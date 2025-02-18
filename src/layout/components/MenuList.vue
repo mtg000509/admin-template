@@ -30,7 +30,7 @@ const menuList = props.menuList;
         <el-icon :size="iconSize">
           <component :is="item.meta?.icon"></component>
         </el-icon>
-        <span>{{ item.meta?.title }}</span>
+        <span>{{ $t(item.meta?.title as string) }}</span>
       </el-menu-item>
     </template>
 
@@ -40,7 +40,7 @@ const menuList = props.menuList;
         <el-icon :size="iconSize">
           <component :is="item.children[0].meta?.icon"></component>
         </el-icon>
-        <span>{{ item.children[0].meta?.title }}</span>
+        <span>{{ $t(item.children[0].meta?.title as string) }}</span>
       </el-menu-item>
     </template>
 
@@ -50,7 +50,7 @@ const menuList = props.menuList;
         <el-icon :size="iconSize">
           <component :is="item.meta?.icon"></component>
         </el-icon>
-        <span>{{ item.meta?.title }}</span>
+        <span>{{ $t(item.meta?.title as string) }}</span>
       </template>
       <MenuList :menuList="item.children" />
     </el-sub-menu>

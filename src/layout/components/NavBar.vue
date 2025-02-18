@@ -2,7 +2,9 @@
 import { useSetting } from '../hooks/useSetting';
 import { useUser } from '../hooks/useUser';
 
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+
+import { useRoute } from 'vue-router';
 
 const props = defineProps<{
   iconSize: number;
@@ -31,6 +33,14 @@ const settingVisible = ref<boolean>(false);
 const changeSettingVisible = () => {
   settingVisible.value = !settingVisible.value;
 };
+
+const $route = useRoute();
+
+const filteredMatched = computed(() => {
+  return $route.matched.filter((item) => item.meta?.title);
+});
+
+console.log(languageList);
 </script>
 
 <template>
@@ -42,11 +52,11 @@ const changeSettingVisible = () => {
     </el-button>
 
     <el-breadcrumb separator-icon="ArrowRight">
-      <el-breadcrumb-item v-for="(item, index) in $route.matched" v-show="item.meta.title" :key="index" :to="item.path">
+      <el-breadcrumb-item v-for="(item, index) in filteredMatched" :key="index" :to="item.path">
         <el-icon :size="iconSize">
           <component :is="item.meta.icon"></component>
         </el-icon>
-        <span>{{ item.meta.title }}</span>
+        <span>{{ $t(item.meta.title as string) }}</span>
       </el-breadcrumb-item>
     </el-breadcrumb>
 
@@ -111,7 +121,9 @@ const changeSettingVisible = () => {
 
       <template #default>
         <el-form>
-          <el-form-item label="语言：">1 </el-form-item>
+          <el-form-item label="语言：">
+            <el-select v-model="language"> </el-select>
+          </el-form-item>
         </el-form>
       </template>
 

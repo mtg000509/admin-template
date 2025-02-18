@@ -49,6 +49,14 @@ export default defineConfig(({ mode }) => {
     server: {
       // 使用环境变量指定端口，默认为 8888
       port: Number(env.VITE_PORT) || 8888,
+      // 代理跨域
+      proxy: {
+        [env.VITE_API_BASE_URL]: {
+          target: env.VITE_SERVER_URL,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
     },
   };
 });
